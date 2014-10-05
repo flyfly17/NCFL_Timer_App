@@ -1,0 +1,28 @@
+function checklength(i) {
+    'use strict';
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
+}
+var minutes, seconds, count, counter, timer;
+count = 181; //3 minutes in seconds
+counter = setInterval(timer, 1000); 
+
+function timer() {
+    'use strict';
+    count = count - 1;
+    minutes = checklength(Math.floor(count / 60)); ///Math.floor rounds down
+    seconds = checklength(count - minutes * 60);
+    if (count < 0) {
+        clearInterval(counter);
+        return;
+    }
+    document.getElementById("timer").innerHTML = 'Time Remaining ' + minutes + ':' + seconds + ' ';
+    if (count === 0) {
+        location.stop(); 
+
+    }
+    
+}
+
