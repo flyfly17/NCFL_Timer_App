@@ -1,28 +1,66 @@
-function checklength(i) {
-    'use strict';
+//formats numbers with a leading zero if they are less than 10
+function pad(i)
+{
     if (i < 10) {
         i = "0" + i;
     }
     return i;
 }
-var minutes, seconds, count, counter, timer;
-count = 181; //3 minutes in seconds
-counter = setInterval(timer, 1000); 
 
-function timer() {
-    'use strict';
-    count = count - 1;
-    minutes = checklength(Math.floor(count / 60)); ///Math.floor rounds down
-    seconds = checklength(count - minutes * 60);
-    if (count < 0) {
-        clearInterval(counter);
+//updates the timer UI with mins and secs
+function updateTimer(mins, secs)
+{
+    $("#mins").html(pad(mins));
+    $("#secs").html(pad(secs));
+}
+
+//countdown calls itself until it is paused or reaches zero
+function countdown(count)
+{
+
+    var mins = Math.floor(count / 60); ///Math.floor rounds down
+    var secs = count % 60;
+
+    updateTimer(mins, secs)
+
+    if (count == 0 || paused)
         return;
-    }
-    document.getElementById("timer").innerHTML = 'Time Remaining ' + minutes + ':' + seconds + ' ';
-    if (count === 0) {
-        location.stop(); 
 
-    }
+    count-=1;
+    setTimeout('countdown(' + count + ')', 1000);
     
 }
+
+//get the current time from the UI
+function readTimeLeft()
+{
+    var mins = parseInt($("#mins").html());
+    var secs = parseInt($("#secs").html());
+    return mins * 60 + secs;
+}
+
+function startCount()
+{
+    var count = readTimeLeft();
+    paused = false;
+    countdown(count);
+}
+
+function stopCount()
+{
+    console.log("stop button clicked");
+    paused = true;
+}
+
+var paused = false;
+
+
+$( document ).ready(function() 
+{
+    //register the click events
+    $('#start').click(startCount);
+    $('#stop').click(stopCount);
+       
+});
+
 
