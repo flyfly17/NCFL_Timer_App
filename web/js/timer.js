@@ -4,6 +4,7 @@ function pad(i)
     if (i < 10) {
         i = "0" + i;
     }
+
     return i;
 }
 
@@ -23,12 +24,21 @@ function countdown(count)
 
     updateTimer(mins, secs)
 
-    if (count == 0 || paused)
+    if (paused)
         return;
 
     count-=1;
+
     setTimeout('countdown(' + count + ')', 1000);
     
+}
+
+
+function restart()
+{
+    
+    updateTimer(mins, secs);
+
 }
 
 //get the current time from the UI
@@ -60,6 +70,7 @@ $( document ).ready(function()
     //register the click events
     $('#start').click(startCount);
     $('#stop').click(stopCount);
+    $('#restart').click(restart);
        
 });
 

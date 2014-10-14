@@ -1,4 +1,20 @@
-#start
-	<button id="start">start timer</button>
-#stop
-	<button id="stop">stop timer</button>
+body
+{
+	background-color: #000080;
+}
+
+h1
+{
+	color: #F5F5F5;
+}
+
+p
+{
+	color: #F5F5F5;
+}
+
+#timer
+{
+	color: #F5F5F5;
+}
+
