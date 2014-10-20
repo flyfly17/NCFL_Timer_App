@@ -75,8 +75,49 @@ function stopCount()
 var paused = false;
 
 
+
+function showTimer(format)
+{
+    console.log("showing the timer screen");
+    $(".screen").hide();
+    //before we show the timer, take format and put it into the template
+    $("#timer").show();
+
+}
+
+function showDebateFormats(types)
+{
+    
+    console.log("showing debate formats");
+    console.log("types: " + types);
+    
+    //read the template
+    var tmpl = $("#tmpl-debate_fmt").html();
+    tmpl = _.template(tmpl);
+    var listContainer = $("#debate_types");
+    listContainer.html('');
+    //loop through the formats, and add to the display
+    for(var i=0;i<types.length;i++)
+    {
+        var dt = types[i];
+        var formatHTML = tmpl(dt);
+        var li = $(formatHTML);
+        listContainer.append(li);
+        //add a click event to get data for timer
+        li.click( function(format) {
+                showTimer(format);
+            }.bind(this,dt)
+        );
+    }
+    
+    
+}
+
+
 $( document ).ready(function() 
 {
+    //pass in data defined in models
+    showDebateFormats(debateTypes);
     //register the click events
     $('#start').click(startCount);
     $('#stop').click(stopCount);

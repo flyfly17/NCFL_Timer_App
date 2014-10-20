@@ -1,20 +1,24 @@
 body
 {
-	background-color: #000080;
+    background-color: #000080;
 }
 
 h1
 {
-	color: #F5F5F5;
+    color: #F5F5F5;
 }
 
 p
 {
-	color: #F5F5F5;
+    color: #F5F5F5;
 }
 
 #timer
 {
-	color: #F5F5F5;
+    color: #F5F5F5;
 }
 
+.hidden
+{
+    display: none;
+}
