@@ -1,3 +1,5 @@
+
+
 //formats numbers with a leading zero if they are less than 10
 function pad(i)
 {
@@ -19,12 +21,16 @@ function updateTimer(mins, secs)
 function countdown(count)
 {
 
+    if (paused)
+        return;
+
     var mins = Math.floor(count / 60); ///Math.floor rounds down
     var secs = count % 60;
 
     updateTimer(mins, secs)
 
-    if (paused)
+
+    if (count==0)
         return;
 
     count-=1;
@@ -33,11 +39,15 @@ function countdown(count)
     
 }
 
+function countup(count)
+{
 
-function restart()
+}
+
+function restart(mins, secs)
 {
     
-    updateTimer(mins, secs);
+    updateTimer(3, 0);
 
 }
 
