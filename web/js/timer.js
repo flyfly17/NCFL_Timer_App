@@ -39,10 +39,20 @@ function countdown(count)
     
 }
 
-function countup(count)
-{
+// function countup(count)
+// {
+//     if (paused)
+//         return;
+//     var mins = Math.floor(count / 60); ///Math.floor rounds down
+//     var secs = count % 60;
 
-}
+//     updateTimer(mins, secs)
+
+//     if count(==0)
+//         return;
+
+//     count = +1
+// }
 
 function restart(mins, secs)
 {
@@ -76,13 +86,19 @@ var paused = false;
 
 
 
-function showTimer(format)
+function showTimer(formats)
 {
     console.log("showing the timer screen");
     $(".screen").hide();
-    //before we show the timer, take format and put it into the template
-    $("#timer").show();
-
+    //read the template
+    var tmpl = $("#tmpl-new_timer").html();
+    tmpl = _.template(tmpl);
+    var listContainer = $("#debate_formats");
+    listContainer.html('');
+    
+ //before we show the timer, take format and put it into the template
+  
+    $("#new_timer").show();
 }
 
 function showDebateFormats(types)
@@ -112,6 +128,7 @@ function showDebateFormats(types)
     
     
 }
+
 
 
 $( document ).ready(function() 

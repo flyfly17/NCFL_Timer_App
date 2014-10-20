@@ -28,3 +28,4 @@ var debateTypes =
     new DebateType("pf", "Public Forum"),
     new DebateType("policy", "Team Policy Debate")
 ];
+

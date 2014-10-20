@@ -51,6 +51,26 @@
     <button id="restart">Restart</button>
 </section>
 
+<script type="text/template" id="tmpl-new_timer">
+  <li id="<%= formats %>" class=""><button><%= formats %></button></li>
+</script>
+
+<script type="text/template" id="tmpl-new-timer">
+    <header>
+        <h2><%= name %></h2>
+    </header>
+    <div id="timer">
+        <strong>Time Remaining: </strong><span id="mins">0</span>:<span id="secs">10</span>
+    </div>
+    <div id="timerControls">
+
+        <% for(key in formats) { %>
+            <button id="<%= key %>" class=""><%= key %></button>
+        <% }) %>
+  
+    </div>
+    
+</script>
 
 <script type="text/template" id="tmpl-debate_fmt">
     <li id="<%= code %>" class=""><button><%= name %></button></li>
@@ -70,7 +90,6 @@
         <% }) %>
   
     </div>
-    
     
 </script>
 
