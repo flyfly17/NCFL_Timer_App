@@ -9,12 +9,24 @@ function pad(i)
 
     return i;
 }
+function mins(time)
+{
+    console.log('getting mins for: ' + time);
+    var m = Math.floor(time/60);
+    console.log('mins: ' + m);
+    return m;
+}
+
+function secs(time)
+{
+    return time % 60;
+}
 
 //updates the timer UI with mins and secs
-function updateTimer(mins, secs)
+function updateTimer(m, s)
 {
-    $("#mins").html(pad(mins));
-    $("#secs").html(pad(secs));
+    $("#mins").html(pad(m));
+    $("#secs").html(pad(s));
 }
 
 //countdown calls itself until it is paused or reaches zero
@@ -24,10 +36,10 @@ function countdown(count)
     if (paused)
         return;
 
-    var mins = Math.floor(count / 60); ///Math.floor rounds down
-    var secs = count % 60;
+    var m = mins(count); ///Math.floor rounds down
+    var s = secs(count);
 
-    updateTimer(mins, secs)
+    updateTimer(m, s)
 
 
     if (count==0)
@@ -86,19 +98,25 @@ var paused = false;
 
 
 
-function showTimer(formats)
+function showTimer(dt)
 {
     console.log("showing the timer screen");
     $(".screen").hide();
     //read the template
-    var tmpl = $("#tmpl-new_timer").html();
-    tmpl = _.template(tmpl);
-    var listContainer = $("#debate_formats");
-    listContainer.html('');
+    var tmpl = _.template($("#tmpl-debate_timer").html());
+    var screen = $("#timer");
+    var context = {name: dt.name, code: dt.code, formats: dt.formats};
+    screen.html(tmpl(context));
+    //bind the buttons to our timer function
+    $(".timerFormat").click(function(event){
+        var time = $(event.target).data('time');
+        console.log('time:' + time);
+        updateTimer(mins(time), secs(time));
+        
+    });
     
- //before we show the timer, take format and put it into the template
-  
-    $("#new_timer").show();
+    //before we show the timer, take format and put it into the template
+    $("#timer").show();
 }
 
 function showDebateFormats(types)
