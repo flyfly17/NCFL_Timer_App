@@ -39,6 +39,6 @@ var debateTypes =
             profocus: 2 * 60, 
             confocus: 2 * 60
          }),
-    new DebateType("policy", "Team Policy Debate", 2 * 60, {pro: 8 * 60, cross: 3 * 60, con: 8 * 60} )
+    new DebateType("policy", "Team Policy Debate", 2 * 60, {constructive: 8 * 60, cross: 3 * 60, rebuttal: 4 * 60} )
 ];
 
