@@ -4,13 +4,21 @@
 <head>
 
     <title> National Catholic Forensics League </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="css/ncfl_timer.css" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <!--link rel="stylesheet" href="css/bootstrap.css"> -->
+    <link rel="stylesheet" href="css/ncfl_timer.css">
+
     <script src="js/jquery-1.11.1.min.js"></script>
     <script src="js/underscore-min.js"></script>
 
+    <!--script src="js/bootstrap.js"></script> -->
     <script src="js/models.js"> </script>
     <script src="js/timer.js"> </script>
+    
+    
 
 </head>
 
@@ -37,7 +45,6 @@
     <button id="stop">Stop</button>
     <button id="restart">Restart</button>
 </section>
-
 
 <section id="old_timer" class="screen hidden">
     <h1> National Catholic Forensics League </h1>
@@ -80,6 +87,7 @@
     <header>
         <h2><%= name %></h2>
     </header>
+
     <div id="timer">
         <strong>Time Remaining: </strong><span id="mins">00</span>:<span id="secs">00</span>
         <div id="timerControls" class="hidden">
@@ -89,13 +97,12 @@
     </div>
     <div id="timerControls">
         <% for(key in formats) { %>
-            <button id="<%= key %>" data-time="<%= formats[key] %>" class="timerFormat"><%= key %></button>
+        	<button id="<%= key %>" data-time="<%= formats[key] %>" class="timerFormat"><%= key %></button>
+         
         <% } %>
     </div>
     
 </script>
-
-
 
 
 </body>

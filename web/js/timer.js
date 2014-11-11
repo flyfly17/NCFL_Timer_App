@@ -143,11 +143,8 @@ function showDebateFormats(types)
             }.bind(this,dt)
         );
     }
-    
-    
+        
 }
-
-
 
 $( document ).ready(function() 
 {
