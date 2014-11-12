@@ -1,6 +1,17 @@
+html
+{
+	background: white;
+
+}
+
 body
 {
     background-color: #000080;
+    width: 320px;
+    height: 568px;
+    border: 1px solid black;
+    margin: 0 auto;
+    overflow: auto;
 }
 
 h1
@@ -17,8 +28,11 @@ p
 {
     color: #F5F5F5;
 }
-
-.hidden
+.screen
 {
-    display: none;
+	display: none;
+}
+.screen.initial
+{
+	display: block;
 }

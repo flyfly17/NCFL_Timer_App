@@ -21,6 +21,31 @@ Debate
     --> prep time
 */
 
+var debateLabels = {
+ 
+    ac: "Aff Construct", 
+    negcx: "Neg Cross-Ex",
+    nc: "Neg Construct", 
+    affcx: "Aff Cross-Ex", 
+    ar1: "Affirmative Rebuttal One", 
+    nr: "Negative Rebuttal", 
+    ar2: "Affirmative Rebuttal 2",
+    pro1: "First Pro", 
+    con1: "First Con", 
+    crossfire: "Crossfire", 
+    pro2: "Second Pro", 
+    con2: "Second Con", 
+    crossfire: "Crossfire", 
+    pro1sum: "First Pro Summary", 
+    con1sum: "First Con Summary", 
+    grandcross: "Grand Crossfire", 
+    profocus: "Pro Focus", 
+    confocus: "Con Focus",
+    constructive: "Constructive", 
+    cross: "Cross Examination",
+    rebuttal: "Rebuttal",
+};
+
 
 var debateTypes =
 [

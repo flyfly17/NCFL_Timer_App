@@ -8,15 +8,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <!--link rel="stylesheet" href="css/bootstrap.css"> -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/ncfl_timer.css">
+
 
     <script src="js/jquery-1.11.1.min.js"></script>
     <script src="js/underscore-min.js"></script>
-    <script src="js/bootstrap-min.js"></script>
 
-    <!--script src="js/bootstrap.js"></script> -->
+
+    <script src="js/bootstrap.js"></script> 
     <script src="js/models.js"> </script>
     <script src="js/timer.js"> </script>
     
@@ -26,83 +26,67 @@
 
 <body>
 
-<section id="format_menu" class="screen">
+<section id="format_menu" class="screen initial">
     <header>
         <h1>Choose Debate Format</h1>
     </header>
     <div>
-        <ul id="debate_types">
-        </ul>
+        <div id="debate_types" class="btn-group-vertical">
+        </div> 
     </div>
 </section>
 
-<section id="timer" class="screen hidden">
-    <h1> National Catholic Forensics League </h1>
-    <p>Check back for more updates soon!</p>
+<section id="timer" class="screen container-fluid">
+ <!-- show the different times for a debate format -->
+    <div id="debate_timer"> </div>
 
-    <div id="timer">
-        <strong>Time Remaining: </strong><span id="mins">0</span>:<span id="secs">10</span>
+    <div id="timer-controls">
+        <button id="start" class="btn btn-success disabled">Start</button>
+        <button id="stop" class="btn btn-danger disabled">Stop</button>
+        <button id="reset" class="btn btn-warning disabled">Reset</button>
     </div>
-    <button id="start">Start</button>
-    <button id="stop">Stop</button>
-    <button id="restart">Restart</button>
+
 </section>
 
-<section id="old_timer" class="screen hidden">
-    <h1> National Catholic Forensics League </h1>
-    <p>Check back for more updates soon!</p>
-
-    <div id="timer">
-        <strong>Time Remaining: </strong><span id="mins">0</span>:<span id="secs">10</span>
-    </div>
-    <button id="foo">Start</button>
-    <button id="bar">Stop</button>
-    <button id="restart">Restart</button>
-</section>
 
 <script type="text/template" id="tmpl-new_timer">
   <li id="<%= formats %>" class=""><button><%= formats %></button></li>
 </script>
 
-<script type="text/template" id="tmpl-new-timer">
-    <header>
-        <h2><%= name %></h2>
-    </header>
-    <div id="timer">
-        <strong>Time Remaining: </strong><span id="mins">0</span>:<span id="secs">10</span>
-    </div>
-    <div id="timerControls">
 
-        <% for(key in formats) { %>
-            <button id="<%= key %>" class=""><%= key %></button>
-        <% }) %>
-  
-    </div>
-    
-</script>
 
 <script type="text/template" id="tmpl-debate_fmt">
-    <li id="<%= code %>" class=""><button><%= name %></button></li>
+
+    <button id="<%= code %>" class="btn btn-primary btn-lg"><%= name %></button>
+
 </script>
 
 <script type="text/template" id="tmpl-debate_timer">
     <header>
-        <h2><%= name %></h2>
+        <h2 class="page-header"><%= name %></h2>
+
+        <div class="row">
+
+            <h3 id="main_timer"class="col-md-8 col-md-offset-4">
+                <span id="mins">0</span>:<span id="secs">00</span> 
+            </h3>
+
+        </div>
+
     </header>
 
-    <div id="timer">
-        <strong>Time Remaining: </strong><span id="mins">00</span>:<span id="secs">00</span>
-        <div id="timerControls" class="hidden">
-            <button id="start">Start</button>
-            <button id="stop">Stop</button>
-        </div>
-    </div>
-    <div id="timerControls">
+    <div id="debate-round" class="row">
         <% for(key in formats) { %>
-        	<button id="<%= key %>" data-time="<%= formats[key] %>" class="timerFormat"><%= key %></button>
+        	<button id="<%= key %>" class="timerFormat btn btn-default btn-xs col-md-6" data-time="<%= formats[key] %>"><%= debateLabels[key] %></button>
          
         <% } %>
     </div>
+
+    <button id="prep_timer" class="col-md-4 col-md-offset-4 btn btn-info">
+
+                <span class="mins">0</span>:<span class="secs">00</span> 
+    </button>
+
     
 </script>
 

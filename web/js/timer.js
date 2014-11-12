@@ -23,10 +23,10 @@ function secs(time)
 }
 
 //updates the timer UI with mins and secs
-function updateTimer(m, s)
+function updateTimer(timer_id,m, s)
 {
-    $("#mins").html(pad(m));
-    $("#secs").html(pad(s));
+    $(timer_id + " .mins").html(pad(m));
+    $(timer_id + " .secs").html(pad(s));
 }
 
 //countdown calls itself until it is paused or reaches zero
@@ -66,11 +66,11 @@ function countdown(count)
 //     count = +1
 // }
 
-function restart(mins, secs)
+function reset()
 {
-    
-    updateTimer(3, 0);
-
+    $(".timerFormat").removeClass("disabled active");
+    $("#timer-controls button").addClass("disabled").removeClass("active");
+    updateTimer(0,0);
 }
 
 //get the current time from the UI
@@ -104,18 +104,21 @@ function showTimer(dt)
     $(".screen").hide();
     //read the template
     var tmpl = _.template($("#tmpl-debate_timer").html());
-    var screen = $("#timer");
+    var screen = $("#debate_timer");
     var context = {name: dt.name, code: dt.code, formats: dt.formats};
     screen.html(tmpl(context));
     //bind the buttons to our timer function
     $(".timerFormat").click(function(event){
+        $("#timer-controls button").removeClass("disabled");  
         var time = $(event.target).data('time');
-        console.log('time:' + time);
+        $(event.target).addClass("active");
+        $(event.target).siblings(".timerFormat").addClass("disabled").removeClass("active");
         updateTimer(mins(time), secs(time));
         
     });
     
     //before we show the timer, take format and put it into the template
+    //$("#timer").removeClass("hidden");
     $("#timer").show();
 }
 
@@ -153,7 +156,7 @@ $( document ).ready(function()
     //register the click events
     $('#start').click(startCount);
     $('#stop').click(stopCount);
-    $('#restart').click(restart);
+    $('#reset').click(reset);
        
 });
 
