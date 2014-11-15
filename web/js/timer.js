@@ -51,21 +51,6 @@ function countdown(count)
     
 }
 
-// function countup(count)
-// {
-//     if (paused)
-//         return;
-//     var mins = Math.floor(count / 60); ///Math.floor rounds down
-//     var secs = count % 60;
-
-//     updateTimer(mins, secs)
-
-//     if count(==0)
-//         return;
-
-//     count = +1
-// }
-
 function reset()
 {
     $(".timerFormat").removeClass("disabled active");
@@ -122,6 +107,33 @@ function showTimer(dt)
     $("#timer").show();
 }
 
+function showSpeechFormats(types)
+{
+    
+    console.log("showing speech formats");
+    console.log("types: " + types);
+    
+    //read the template
+    var tmpl = $("#tmpl-speech_fmt").html();
+    tmpl = _.template(tmpl);
+    var listContainer = $("#speech_types");
+    listContainer.html('');
+    //loop through the formats, and add to the display
+    for(var i=0;i<types.length;i++)
+    {
+        var dt = types[i];
+        var formatHTML = tmpl(dt);
+        var li = $(formatHTML);
+        listContainer.append(li);
+        //add a click event to get data for timer
+        li.click( function(format) {
+                showTimer(format);
+            }.bind(this,dt)
+        );
+    }
+        
+}
+
 function showDebateFormats(types)
 {
     
@@ -157,6 +169,11 @@ $( document ).ready(function()
     $('#start').click(startCount);
     $('#stop').click(stopCount);
     $('#reset').click(reset);
+
+    /*showSpeechFormats(speechTypes);
+    $('#start').click(startCount);
+    $('#stop').click(stopCount);
+    $('#reset').click(reset); */
        
 });
 

@@ -1,4 +1,12 @@
 
+/*function SpeechType(code, name, prepTime, formats)
+{
+    this.code = code;
+    this.name = name;
+    this.prepTime = prepTime;
+    this.formats = formats;
+}
+*/
 
 function DebateType(code, name, prepTime, formats)
 {
@@ -8,17 +16,25 @@ function DebateType(code, name, prepTime, formats)
     this.formats = formats;
 }
 
-/*
-Debate
---> Lincoln Douglas
-    --> AC
-    --> CX
-    --> NC
-    --> CX
-    --> 1AR
-    --> NR
-    --> 2AR
-    --> prep time
+/*var speechTypes = 
+[
+    new speechType("dec", "Declamation", 10 * 60),
+    new speechType("di", "Dramatic Interpretation", 10 * 60),
+    new speechType("duo", "Duo Interpretation", 10 * 60),
+    new speechType("oi", "Oral Interpretation", 10 * 60),
+    new speechType("oo", "Original Oratory", 10 * 60),
+    new speechType("ex", "Extemporaneous", 7 * 60),
+};
+
+var speechLabels = {
+    dec: "Declamation",
+    di: "Dramatic Interpretation",
+    duo: "Duo Interpretation",
+    oi: "Oral Interpretation",
+    oo: "Original Oratory",
+    ex: "Extemporaneous",
+}
+
 */
 
 var debateLabels = {

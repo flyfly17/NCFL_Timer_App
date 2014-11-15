@@ -26,15 +26,68 @@
 
 <body>
 
-<section id="format_menu" class="screen initial">
+<!-- there should be a screen that allows you to choose Speech or Debate -->
+
+<!-- this screen should have seven buttons that allow you to pick which event you are judging; right now it only comes up with "Choose Speech Formats" -->
+
+<section id="speech_menu" class="text-center screen initial">
     <header>
-        <h1>Choose Debate Format</h1>
+        <h1>Choose Speech <br> Format </br> </h1>
+    </header>
+    <div>
+        <div id="speech_types" class="btn-group-vertical">
+        </div> 
+    </div>
+</section> 
+
+<!-- I created a template for speech like we did for debate but none of the information from models.js reads into this script -->
+
+<script type="text/template" id="tmpl-speech_timer">
+    <header>
+        <h2 class="page-header"><%= name %></h2>
+
+        <div class="row">
+
+            <h3 id="main_timer"class="col-md-8 col-md-offset-4">
+                <span id="mins">0</span>:<span id="secs">00</span> 
+            </h3>
+
+        </div>
+
+    </header>
+
+    <div id="speech-round" class="row">
+        <% for(key in formats) { %>
+            <button id="<%= key %>" class="timerFormat btn btn-default btn-xs col-md-6" data-time="<%= formats[key] %>"><%= speechLabels[key] %></button>
+         
+        <% } %>
+    </div>
+
+    <button id="prep_timer" class="col-md-4 col-md-offset-4 btn btn-info">
+
+                <span class="mins">0</span>:<span class="secs">00</span> 
+    </button>
+
+    
+</script> 
+
+<script type="text/template" id="tmpl-speech_fmt">
+
+    <button id="<%= code %>" class="btn btn-primary btn-lg"><%= name %></button>
+
+</script>
+
+
+<section id="format_menu" class="text-center screen initial">
+    <header>
+        <h1>Choose Debate <br> Format </br> </h1>
     </header>
     <div>
         <div id="debate_types" class="btn-group-vertical">
         </div> 
     </div>
 </section>
+
 
 <section id="timer" class="screen container-fluid">
  <!-- show the different times for a debate format -->
@@ -54,12 +107,13 @@
 </script>
 
 
-
 <script type="text/template" id="tmpl-debate_fmt">
 
     <button id="<%= code %>" class="btn btn-primary btn-lg"><%= name %></button>
 
 </script>
+
+<!-- this script is reading in the specific round times from the Debate Labels function in models -->
 
 <script type="text/template" id="tmpl-debate_timer">
     <header>
@@ -87,7 +141,10 @@
                 <span class="mins">0</span>:<span class="secs">00</span> 
     </button>
 
-    
+    <button type="button" class="btn btn-default" aria-label="Left Align">
+        <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+    </button>
+
 </script>
 
 
