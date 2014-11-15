@@ -24,8 +24,6 @@
 
 </head>
 
-<body>
-
 <!-- there should be a screen that allows you to choose Speech or Debate -->
 
 <!-- this screen should have seven buttons that allow you to pick which event you are judging; right now it only comes up with "Choose Speech Formats" -->
@@ -34,6 +32,7 @@
     <header>
         <h1>Choose Speech <br> Format </br> </h1>
     </header>
+    </font>
     <div>
         <div id="speech_types" class="btn-group-vertical">
         </div> 
@@ -136,14 +135,24 @@
         <% } %>
     </div>
 
+
+    <br>
     <button id="prep_timer" class="col-md-4 col-md-offset-4 btn btn-info">
 
                 <span class="mins">0</span>:<span class="secs">00</span> 
     </button>
+    </br>
 
-    <button type="button" class="btn btn-default" aria-label="Left Align">
+    <br>
+    <button type="button" class="btn btn-large">
         <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+        <script>
+            function goBack() {
+            window.history.back()
+            }
+        </script>
     </button>
+    </br>
 
 </script>
 
