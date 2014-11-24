@@ -1,4 +1,8 @@
-
+/********************************
+ * timer.js
+ * author: Erin Flynn
+ ********************************
+*/
 
 //formats numbers with a leading zero if they are less than 10
 function pad(i)
@@ -11,9 +15,7 @@ function pad(i)
 }
 function mins(time)
 {
-    console.log('getting mins for: ' + time);
     var m = Math.floor(time/60);
-    console.log('mins: ' + m);
     return m;
 }
 
@@ -23,23 +25,33 @@ function secs(time)
 }
 
 //updates the timer UI with mins and secs
-function updateTimer(timer_id,m, s)
+function updateTimer(timer_id, m, s)
 {
+
     $(timer_id + " .mins").html(pad(m));
     $(timer_id + " .secs").html(pad(s));
 }
 
-//countdown calls itself until it is paused or reaches zero
-function countdown(count)
+function reset(timer_id)
+{
+    $(".timerFormat").removeClass("disabled active");
+    $("#timer-controls button").addClass("disabled").removeClass("active");
+    updateTimer(timer_id, 0,0);
+}
+
+function countdown(timer_id, count)
 {
 
+    console.log("counting down");
+
+    var paused = $(timer_id).data("paused") == 'true';
     if (paused)
         return;
 
-    var m = mins(count); ///Math.floor rounds down
+    var m = mins(count); 
     var s = secs(count);
 
-    updateTimer(m, s)
+    updateTimer(timer_id, m, s);
 
 
     if (count==0)
@@ -47,65 +59,79 @@ function countdown(count)
 
     count-=1;
 
-    setTimeout('countdown(' + count + ')', 1000);
-    
+    // console.log('countdown(' + timer_id + ',' + count + ')');
+    setTimeout('countdown("' + timer_id + '",' + count + ')', 1000);
+
 }
 
-function reset()
-{
-    $(".timerFormat").removeClass("disabled active");
-    $("#timer-controls button").addClass("disabled").removeClass("active");
-    updateTimer(0,0);
-}
 
 //get the current time from the UI
-function readTimeLeft()
-{
-    var mins = parseInt($("#mins").html());
-    var secs = parseInt($("#secs").html());
+function readTimeLeft(timer_id)
+{ 
+    var mins = parseInt($(timer_id + " .mins").html());
+    var secs = parseInt($(timer_id + " .secs").html());
     return mins * 60 + secs;
 }
 
-function startCount()
+function startCount(timer_id)
 {
-    var count = readTimeLeft();
-    paused = false;
-    countdown(count);
+    var count = readTimeLeft(timer_id);
+    $(timer_id).data("paused", false);
+    countdown(timer_id, count);
 }
 
-function stopCount()
+function stopCount(timer_id)
 {
-    console.log("stop button clicked");
-    paused = true;
+    $(timer_id).data("paused", true);
 }
-
-var paused = false;
-
 
 
 function showTimer(dt)
 {
     console.log("showing the timer screen");
-    $(".screen").hide();
     //read the template
     var tmpl = _.template($("#tmpl-debate_timer").html());
     var screen = $("#debate_timer");
     var context = {name: dt.name, code: dt.code, formats: dt.formats};
     screen.html(tmpl(context));
+    
     //bind the buttons to our timer function
-    $(".timerFormat").click(function(event){
+    $(".timerFormat").click(function(event) {
         $("#timer-controls button").removeClass("disabled");  
         var time = $(event.target).data('time');
         $(event.target).addClass("active");
         $(event.target).siblings(".timerFormat").addClass("disabled").removeClass("active");
-        updateTimer(mins(time), secs(time));
+        updateTimer('#main_timer', mins(time), secs(time));
         
     });
-    
-    //before we show the timer, take format and put it into the template
-    //$("#timer").removeClass("hidden");
-    $("#timer").show();
+    //click event for prep time
+    if($('#prep_timer').length)
+    {
+
+        console.log("found a timer");
+        $('#prep_timer').click(function() {
+            var paused = $('#prep_timer').data("paused");
+            console.log("paused:" + paused == true);
+            if(paused) //play the prep timer
+            {
+                $('#prep_timer').data("paused", false);
+                $('#prep_timer .glyphicon-play').hide();
+                $('#prep_timer .glyphicon-pause').show();
+                startCount("#prep_timer"); 
+            }
+            else  //pause the prep timer
+            {
+                $('#prep_timer .glyphicon-pause').hide();
+                $('#prep_timer .glyphicon-play').show();
+                $('#prep_timer').data("paused", true);
+            }
+
+        });
+    }
+
+    showScreen("#timer");
 }
+
 
 function showSpeechFormats(types)
 {
@@ -131,7 +157,15 @@ function showSpeechFormats(types)
             }.bind(this,dt)
         );
     }
-        
+      
+    showScreen("#speech_menu");    
+}
+       
+
+function showScreen(screenId)
+{
+    $('.screen').hide();
+    $(screenId).show();
 }
 
 function showDebateFormats(types)
@@ -158,22 +192,25 @@ function showDebateFormats(types)
             }.bind(this,dt)
         );
     }
-        
+
+    showScreen("#debate-menu");
 }
 
 $( document ).ready(function() 
 {
     //pass in data defined in models
-    showDebateFormats(debateTypes);
-    //register the click events
-    $('#start').click(startCount);
-    $('#stop').click(stopCount);
-    $('#reset').click(reset);
+    
+    
+    //register home screen buttons
+    $('#show-speech').click(function(e){ showSpeechFormats(speechTypes); });
+    $('#show-debate').click(function(e){ showDebateFormats(debateTypes); });
 
-    /*showSpeechFormats(speechTypes);
-    $('#start').click(startCount);
-    $('#stop').click(stopCount);
-    $('#reset').click(reset); */
+
+    //register the timer buttons for main timer
+    $('#start').click(function(){ startCount("#main_timer"); } );
+    $('#stop').click(function(){ stopCount("#main_timer"); } );
+    $('#reset').click(function(){ reset("#main_timer"); } );
+
        
 });
 

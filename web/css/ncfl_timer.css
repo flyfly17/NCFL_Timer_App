@@ -24,6 +24,16 @@ h1
 {
     color: #F5F5F5;
     font-family: TimeBurner, Century Gothic, Times New Roman;
+    padding-top: 30px;
+    padding-bottom: 20px;
+}
+
+h4
+{
+    color: #F5F5F5;
+    font-family: TimeBurner, Century Gothic, Times New Roman;
+    padding-top: 20px;
+
 }
 
 p
