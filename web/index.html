@@ -66,10 +66,10 @@
 
     <div id="debate_timer"> </div>
 
-    <div id="timer-controls">
-        <button id="start" class="btn btn-success disabled btn-group btn-group-justified btn-xs .col-md-6">Start</button>
-        <button id="stop" class="btn btn-danger disabled btn-group btn-group-justified btn-xs .col-md-6">Stop</button>
-        <button id="reset" class="btn btn-warning disabled btn-group btn-group-justified btn-xs .col-md-6">Reset</button>
+    <div id="timer-controls" class="row margin-top">
+        <button id="start" class="btn btn-success disabled col-md-3 col-md-offset-1">Start</button>
+        <button id="stop" class="btn btn-danger disabled col-md-3 col-md-offset-1">Stop</button>
+        <button id="reset" class="btn btn-warning disabled col-md-3 col-md-offset-1">Reset</button>
     </div>
 
 </section>
@@ -106,11 +106,13 @@
         <% } %>
     </div>
 
-	<button id="prep_timer" class="col-md-4 col-md-offset-4 btn btn-info" data-paused="true">
-        <span class="glyphicon glyphicon-play"></span>
-        <span class="glyphicon glyphicon-pause collapse"></span>
-        <span class="mins">4</span>:<span class="secs">00</span> 
-    </button>
+    <div class="row">
+    	<button id="prep_timer" class="col-md-4 col-md-offset-4 btn btn-info col-md-4 col-md-offset-4" data-paused="true">
+            <span class="glyphicon glyphicon-play"></span>
+            <span class="glyphicon glyphicon-pause collapse"></span>
+            <span class="mins">4</span>:<span class="secs">00</span> 
+        </button>
+    </div>
 
    
 </script>

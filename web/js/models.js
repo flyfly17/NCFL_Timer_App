@@ -1,3 +1,9 @@
+/********************************
+ * models.js
+ * author: Erin Flynn
+ ********************************
+*/
+
 
 function DebateType(code, name, prepTime, formats)
 {

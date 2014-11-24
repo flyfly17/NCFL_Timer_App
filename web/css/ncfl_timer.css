@@ -53,3 +53,19 @@ p
 {
 	display: block;
 }
+
+.pad
+{
+    padding: .5em;
+}
+
+.margin
+{
+    margin: .5em;
+}
+
+.margin-top
+{
+    margin-top: .5em;
+}
+
