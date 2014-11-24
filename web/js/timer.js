@@ -44,7 +44,7 @@ function countdown(timer_id, count)
 
     console.log("counting down");
 
-    var paused = $(timer_id).data("paused") == 'true';
+    var paused = $(timer_id).data("paused");
     if (paused)
         return;
 
@@ -116,7 +116,7 @@ function showTimer(dt)
             {
                 $('#prep_timer').data("paused", false);
                 $('#prep_timer .glyphicon-play').hide();
-                $('#prep_timer .glyphicon-pause').show();
+                $('#prep_timer .glyphicon-pause').show().removeClass("collapse");
                 startCount("#prep_timer"); 
             }
             else  //pause the prep timer
