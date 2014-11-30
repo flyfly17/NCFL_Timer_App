@@ -6,6 +6,9 @@
 
 //formats numbers with a leading zero if they are less than 10
 
+var stack=new Array();
+stack.push("#home");
+
 function pad(i)
 {
     if (i < 10) {
@@ -127,6 +130,8 @@ function showTimer(dt)
                 $('#prep_timer1').data("paused", true);
             }
 
+
+
         });
     }
 
@@ -156,11 +161,13 @@ function showSpeechFormats(types)
         //add a click event to get data for timer
         li.click(function(format) {
                 showTimer(format);
+                stack.push("place");
             }.bind(this,dt) 
         );
     }
       
-    showScreen("#speech_menu");    
+    showScreen("#speech_menu");
+    stack.push("#speech_menu");    
 }
        
 
@@ -191,21 +198,33 @@ function showDebateFormats(types)
         //add a click event to get data for timer
         li.click( function(format) {
                 showTimer(format);
+                stack.push("place");
             }.bind(this,dt)
         );
     }
 
     showScreen("#debate-menu");
+    stack.push("#debate-menu");
+}
+
+function goBack(stack) 
+{
+    stopCount("#main_timer");
+    reset("#main_timer");
+
+    if(stack[length-1] != "#home")
+        {
+            showScreen(stack[length-2]);
+            stack.pop();
+        }
+
 }
 
 function goHome()
 {
+    
+    showScreen("#home");  
      
-}
-
-function goBack()
-{   
- 
 }
 
 $( document ).ready(function() 
@@ -225,10 +244,12 @@ $( document ).ready(function()
 
     //register the home button for the screens
 
-    $('#home').click(function(){ goHome('#home'); } );
+    $('#home_button').click(function(){ goHome('#home'); } );
+
+    //register the back button for all screens
+
+     $('#back_button').click(function(){ goBack(stack); } )
        
-    //register the back button for the screens  
-     $('#home').click(function(){ goHome('#home'); } );
 });
 
 
