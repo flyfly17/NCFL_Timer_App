@@ -24,9 +24,13 @@
 </head>
 
 <body>
-	<button type="button" class="btn btn-large pull-right">
+	<button id="home_button" type="button" class="btn btn-large pull-right">
 		<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
 	</button>
+
+    <button id="back_button" type="button" class="btn btn-large pull-left">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    </button>
 
 <section id="home" class="text-center screen initial">
 
@@ -66,10 +70,10 @@
 
     <div id="debate_timer"> </div>
 
-    <div id="timer-controls" class="row margin-top">
-        <button id="start" class="btn btn-success disabled col-md-3 col-md-offset-1">Start</button>
-        <button id="stop" class="btn btn-danger disabled col-md-3 col-md-offset-1">Stop</button>
-        <button id="reset" class="btn btn-warning disabled col-md-3 col-md-offset-1">Reset</button>
+    <div id="timer-controls" class="row margin-top"> 
+        <button id="start" class="btn btn-success disabled margin-buttons btn-lg btn-block">Start</button>
+        <button id="stop" class="btn btn-danger disabled margin-buttons btn-lg btn-block">Stop</button>
+        <button id="reset" class="btn btn-warning disabled margin-buttons btn-lg btn-block">Reset</button>
     </div>
 
 </section>
@@ -93,27 +97,35 @@
     <header>
         <h2 class="page-header"><%= name %></h2>
         <div class="row">
-            <h3 id="main_timer" data-paused="false" class="col-md-8 col-md-offset-4">
+            <h1 id="main_timer" data-paused="false" class="text-center">
                 <span class="mins">0</span>:<span class="secs">00</span> 
-            </h3>
+            </h1>
         </div>
     </header>
 
     <div id="debate-round" class="row">
         <% for(key in formats) { %>
-        	<button id="<%= key %>" class="timerFormat btn btn-default btn-xs col-md-6" data-time="<%= formats[key] %>"><%= debateLabels[key] %></button>
+        	<button id="<%= key %>" class="timerFormat btn btn-default btn-xs col-md-4" data-time="<%= formats[key] %>"><%= debateLabels[key] %></button>
          
         <% } %>
     </div>
 
-    <div class="row">
-    	<button id="prep_timer" class="col-md-4 col-md-offset-4 btn btn-info col-md-4 col-md-offset-4" data-paused="true">
+    <div class="row margin-top">
+    	<button id="prep_timer1" class="col-md-6 btn btn-info" data-paused="true">
+            <span class=>Aff Prep</span> 
             <span class="glyphicon glyphicon-play"></span>
             <span class="glyphicon glyphicon-pause collapse"></span>
             <span class="mins">4</span>:<span class="secs">00</span> 
         </button>
-    </div>
 
+        <button id="prep_timer2" class="col-md-6 btn btn-info" data-paused="true">
+            <span class=>Neg Prep</span> 
+            <span class="glyphicon glyphicon-play"></span>
+            <span class="glyphicon glyphicon-pause collapse"></span>
+            <span class="mins">4</span>:<span class="secs">00</span> 
+
+        </button>
+    </div>
    
 </script>
 
@@ -123,7 +135,7 @@
 
         <div class="row">
 
-            <h3 id="main_timer"class="col-md-8 col-md-offset-4">
+            <h3 id="main_timer" class="text-center">
                 <span class="mins">0</span>:<span class="secs">00</span> 
             </h3>
 
@@ -133,7 +145,7 @@
 
     <div id="speech-round" class="row">
         <% for(key in formats) { %>
-            <button id="<%= key %>" class="timerFormat btn btn-default btn-xs col-md-6" data-time="<%= formats[key] %>"><%= speechLabels[key] %></button>
+            <button id="<%= key %>" class="timerFormat btn btn-default btn-xs col-md-4" data-time="<%= formats[key] %>"><%= speechLabels[key] %></button>
          
         <% } %>
     </div>

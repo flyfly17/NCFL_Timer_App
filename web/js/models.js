@@ -13,14 +13,15 @@ function DebateType(code, name, prepTime, formats)
     this.formats = formats;
 }
 
+
 var speechTypes = 
 [
-    new DebateType("dec", "Declamation", 10 * 60),
-    new DebateType("di", "Dramatic Interpretation", 10 * 60),
-    new DebateType("duo", "Duo Interpretation", 10 * 60),
-    new DebateType("oi", "Oral Interpretation", 10 * 60),
-    new DebateType("oo", "Original Oratory", 10 * 60),
-    new DebateType("ex", "Extemporaneous", 7 * 60),
+    new DebateType("dec", "Declamation", 10 * 60, {dec: 10 * 60}),
+    new DebateType("di", "Dramatic Interpretation", 10 * 60, {di: 10 * 60}),
+    new DebateType("duo", "Duo Interpretation", 10 * 60, {duo: 10 * 60}),
+    new DebateType("oi", "Oral Interpretation", 10 * 60, {oi: 10 * 60}),
+    new DebateType("oo", "Original Oratory", 10 * 60, {oo: 10 *60}),
+    new DebateType("ex", "Extemporaneous", 7 * 60, {ex: 7 * 60}),
 ];
 
 var speechLabels = {

@@ -5,6 +5,7 @@
 */
 
 //formats numbers with a leading zero if they are less than 10
+
 function pad(i)
 {
     if (i < 10) {
@@ -105,25 +106,25 @@ function showTimer(dt)
         
     });
     //click event for prep time
-    if($('#prep_timer').length)
+    if($('#prep_timer1, #prep_timer2').length)
     {
 
         console.log("found a timer");
-        $('#prep_timer').click(function() {
-            var paused = $('#prep_timer').data("paused");
+        $('#prep_timer1').click(function() {
+            var paused = $('#prep_timer1').data("paused");
             console.log("paused:" + paused == true);
             if(paused) //play the prep timer
             {
-                $('#prep_timer').data("paused", false);
-                $('#prep_timer .glyphicon-play').hide();
-                $('#prep_timer .glyphicon-pause').show().removeClass("collapse");
-                startCount("#prep_timer"); 
+                $('#prep_timer1').data("paused", false);
+                $('#prep_timer1 .glyphicon-play').hide();
+                $('#prep_timer1 .glyphicon-pause').show().removeClass("collapse");
+                startCount("#prep_timer1"); 
             }
             else  //pause the prep timer
             {
-                $('#prep_timer .glyphicon-pause').hide();
-                $('#prep_timer .glyphicon-play').show();
-                $('#prep_timer').data("paused", true);
+                $('#prep_timer1 .glyphicon-pause').hide();
+                $('#prep_timer1 .glyphicon-play').show();
+                $('#prep_timer1').data("paused", true);
             }
 
         });
@@ -131,6 +132,7 @@ function showTimer(dt)
 
     showScreen("#timer");
 }
+
 
 
 function showSpeechFormats(types)
@@ -152,9 +154,9 @@ function showSpeechFormats(types)
         var li = $(formatHTML);
         listContainer.append(li);
         //add a click event to get data for timer
-        li.click( function(format) {
+        li.click(function(format) {
                 showTimer(format);
-            }.bind(this,dt)
+            }.bind(this,dt) 
         );
     }
       
@@ -196,6 +198,16 @@ function showDebateFormats(types)
     showScreen("#debate-menu");
 }
 
+function goHome()
+{
+     
+}
+
+function goBack()
+{   
+ 
+}
+
 $( document ).ready(function() 
 {
     //pass in data defined in models
@@ -211,7 +223,12 @@ $( document ).ready(function()
     $('#stop').click(function(){ stopCount("#main_timer"); } );
     $('#reset').click(function(){ reset("#main_timer"); } );
 
+    //register the home button for the screens
+
+    $('#home').click(function(){ goHome('#home'); } );
        
+    //register the back button for the screens  
+     $('#home').click(function(){ goHome('#home'); } );
 });
 
 
