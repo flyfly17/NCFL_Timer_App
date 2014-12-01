@@ -16,12 +16,12 @@ function DebateType(code, name, prepTime, formats)
 
 var speechTypes = 
 [
-    new DebateType("dec", "Declamation", 10 * 60, {dec: 10 * 60}),
-    new DebateType("di", "Dramatic Interpretation", 10 * 60, {di: 10 * 60}),
-    new DebateType("duo", "Duo Interpretation", 10 * 60, {duo: 10 * 60}),
-    new DebateType("oi", "Oral Interpretation", 10 * 60, {oi: 10 * 60}),
-    new DebateType("oo", "Original Oratory", 10 * 60, {oo: 10 *60}),
-    new DebateType("ex", "Extemporaneous", 7 * 60, {ex: 7 * 60}),
+    new DebateType("dec", "Declamation", 0, {dec: 10 * 60}),
+    new DebateType("di", "Dramatic Interpretation", 0, {di: 10 * 60}),
+    new DebateType("duo", "Duo Interpretation", 0, {duo: 10 * 60}),
+    new DebateType("oi", "Oral Interpretation", 0, {oi: 10 * 60}),
+    new DebateType("oo", "Original Oratory", 0, {oo: 10 *60}),
+    new DebateType("ex", "Extemporaneous", 0, {ex: 7 * 60}),
 ];
 
 var speechLabels = {
@@ -37,8 +37,8 @@ var speechLabels = {
 
 var debateTypes =
 [
-    new DebateType("ld", "Lincoln Douglas", 4 * 60, {ac: 6 * 60, negcx: 3 * 60, nc: 7 * 60, affcx: 3 * 60, ar1: 4 * 60, nr: 6 * 60, ar2: 3 * 60  }), 
-    new DebateType("pf", "Public Forum", 2 * 60, 
+    new DebateType("ld", "Lincoln Douglas", 4, {ac: 6 * 60, negcx: 3 * 60, nc: 7 * 60, affcx: 3 * 60, ar1: 4 * 60, nr: 6 * 60, ar2: 3 * 60  }), 
+    new DebateType("pf", "Public Forum", 2, 
         {
             pro1: 4 * 60, 
             con1: 4 * 60, 
@@ -52,7 +52,7 @@ var debateTypes =
             profocus: 2 * 60, 
             confocus: 2 * 60
          }),
-    new DebateType("policy", "Team Policy Debate", 2 * 60, {constructive: 8 * 60, cross: 3 * 60, rebuttal: 4 * 60} )
+    new DebateType("policy", "Team Policy Debate", 4, {constructive: 8 * 60, cross: 3 * 60, rebuttal: 4 * 60} )
 ];
 
 var debateLabels = {

@@ -6,8 +6,7 @@
 
 //formats numbers with a leading zero if they are less than 10
 
-var stack=new Array();
-stack.push("#home");
+var count = 0;
 
 function pad(i)
 {
@@ -94,9 +93,12 @@ function showTimer(dt)
 {
     console.log("showing the timer screen");
     //read the template
+    count = count + 3;
+
+    console.log("holder");
     var tmpl = _.template($("#tmpl-debate_timer").html());
     var screen = $("#debate_timer");
-    var context = {name: dt.name, code: dt.code, formats: dt.formats};
+    var context = {name: dt.name, code: dt.code, prepTime: dt.prepTime, formats: dt.formats};
     screen.html(tmpl(context));
     
     //bind the buttons to our timer function
@@ -109,7 +111,9 @@ function showTimer(dt)
         
     });
     //click event for prep time
-    if($('#prep_timer1, #prep_timer2').length)
+    
+
+    if($('#prep_timer1').length)
     {
 
         console.log("found a timer");
@@ -129,9 +133,25 @@ function showTimer(dt)
                 $('#prep_timer1 .glyphicon-play').show();
                 $('#prep_timer1').data("paused", true);
             }
+        });
 
-
-
+        console.log(" ");
+        $('#prep_timer2').click(function() {
+            var paused = $('#prep_timer2').data("paused");
+            console.log("paused:" + paused == true);
+            if(paused) //play the prep timer
+            {
+                $('#prep_timer2').data("paused", false);
+                $('#prep_timer2 .glyphicon-play').hide();
+                $('#prep_timer2 .glyphicon-pause').show().removeClass("collapse");
+                startCount("#prep_timer2"); 
+            }
+            else  //pause the prep timer
+            {
+                $('#prep_timer2 .glyphicon-pause').hide();
+                $('#prep_timer2 .glyphicon-play').show();
+                $('#prep_timer2').data("paused", true);
+            }
         });
     }
 
@@ -161,15 +181,16 @@ function showSpeechFormats(types)
         //add a click event to get data for timer
         li.click(function(format) {
                 showTimer(format);
-                stack.push("place");
             }.bind(this,dt) 
         );
     }
       
     showScreen("#speech_menu");
-    stack.push("#speech_menu");    
+
+    console.log("speech menu");
+    count = 1;    
 }
-       
+
 
 function showScreen(screenId)
 {
@@ -198,26 +219,35 @@ function showDebateFormats(types)
         //add a click event to get data for timer
         li.click( function(format) {
                 showTimer(format);
-                stack.push("place");
             }.bind(this,dt)
         );
     }
 
     showScreen("#debate-menu");
-    stack.push("#debate-menu");
+    count = 2;
 }
 
-function goBack(stack) 
+function goBack() 
 {
     stopCount("#main_timer");
     reset("#main_timer");
-
-    if(stack[length-1] != "#home")
+    if(count != 0)
+    {
+    
+        if(count < 3)
         {
-            showScreen(stack[length-2]);
-            stack.pop();
+            showScreen("#home");
+            count = 0;
         }
-
+        else
+        {
+            count = count - 3;
+            if (count == 1) 
+                {showScreen("#speech_menu");}
+            else 
+                {showScreen("#debate-menu");}
+        }
+    }
 }
 
 function goHome()
@@ -248,7 +278,7 @@ $( document ).ready(function()
 
     //register the back button for all screens
 
-     $('#back_button').click(function(){ goBack(stack); } )
+     $('#back_button').click(function(){ goBack(); } )
        
 });
 
