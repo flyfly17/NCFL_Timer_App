@@ -67,7 +67,6 @@ function countdown(timer_id, count)
 
 }
 
-
 //get the current time from the UI
 function readTimeLeft(timer_id)
 { 
@@ -88,9 +87,21 @@ function stopCount(timer_id)
     $(timer_id).data("paused", true);
 }
 
+function showSpeechTimer(dt)
+
+{
+    var tmpl = _.template($("#tmpl-speech_timer").html());
+    var screen = $("#speech_timer");
+    var context = {name: dt.name, code: dt.code, formats: dt.formats};
+    screen.html(tmpl(context));
+
+
+    showScreen("#timer");
+}
 
 function showTimer(dt)
 {
+    
     console.log("showing the timer screen");
     //read the template
     count = count + 3;
@@ -180,7 +191,7 @@ function showSpeechFormats(types)
         listContainer.append(li);
         //add a click event to get data for timer
         li.click(function(format) {
-                showTimer(format);
+                showSpeechTimer(format);
             }.bind(this,dt) 
         );
     }
@@ -254,8 +265,18 @@ function goHome()
 {
     
     showScreen("#home");  
+
+    { 
+
+    if (showScreen == ('#home'))
+        $("#home_button").hide();
+
+    else
+        $("#home_button").show();
+    } 
      
 }
+
 
 $( document ).ready(function() 
 {
@@ -275,6 +296,7 @@ $( document ).ready(function()
     //register the home button for the screens
 
     $('#home_button').click(function(){ goHome('#home'); } );
+
 
     //register the back button for all screens
 

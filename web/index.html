@@ -25,8 +25,8 @@
 
 <body>
 	<button id="home_button" type="button" class="btn btn-large pull-right">
-		<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
-	</button>
+	   <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+    </button>
 
     <button id="back_button" type="button" class="btn btn-large pull-left">
         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -38,9 +38,8 @@
 	
 	<h4> Please choose a competition: </h4>
 
-
-   <button id="show-speech" type="button" class="btn btn-lg btn-block btn-success">Speech</button>
-   <button id="show-debate" type="button" class="btn btn-lg btn-block btn-success">Debate</button>
+    <button id="show-speech" type="button" class="btn btn-lg btn-block btn-success">Speech</button>
+    <button id="show-debate" type="button" class="btn btn-lg btn-block btn-success">Debate</button>    
 
 </section>
 
@@ -143,12 +142,6 @@
 
     </header>
 
-    <div id="speech-round" class="row">
-        <% for(key in formats) { %>
-            <button id="<%= key %>" class="timerFormat btn btn-default btn-xs col-md-4" data-time="<%= formats[key] %>"><%= speechLabels[key] %></button>
-         
-        <% } %>
-    </div>
     
 </script> 
 
