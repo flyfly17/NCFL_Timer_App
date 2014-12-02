@@ -87,17 +87,34 @@ function stopCount(timer_id)
     $(timer_id).data("paused", true);
 }
 
-function showSpeechTimer(dt)
 
+/*function showSpeechTimer(dt)
 {
+    
+    console.log("showing the timer screen");
+    //read the template
+    count = count + 3;
+
+    console.log("holder");
     var tmpl = _.template($("#tmpl-speech_timer").html());
     var screen = $("#speech_timer");
     var context = {name: dt.name, code: dt.code, formats: dt.formats};
     screen.html(tmpl(context));
-
+    
+    //bind the buttons to our timer function
+    $(".timerFormat").click(function(event) {
+        $("#timer-controls button").removeClass("disabled");  
+        var time = $(event.target).data('time');
+        $(event.target).addClass("active");
+        $(event.target).siblings(".timerFormat").addClass("disabled").removeClass("active");
+        updateTimer('#main_timer', mins(time), secs(time));
+        
+    });
 
     showScreen("#timer");
 }
+
+*/
 
 function showTimer(dt)
 {
@@ -191,7 +208,7 @@ function showSpeechFormats(types)
         listContainer.append(li);
         //add a click event to get data for timer
         li.click(function(format) {
-                showSpeechTimer(format);
+                showTimer(format);
             }.bind(this,dt) 
         );
     }
