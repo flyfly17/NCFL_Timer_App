@@ -98,7 +98,7 @@ function stopCount(timer_id)
     console.log("holder");
     var tmpl = _.template($("#tmpl-speech_timer").html());
     var screen = $("#speech_timer");
-    var context = {name: dt.name, code: dt.code, formats: dt.formats};
+    var context = {name: dt.name, code: dt.code, roundtime: dt.roundtime,};
     screen.html(tmpl(context));
     
     //bind the buttons to our timer function
@@ -283,15 +283,26 @@ function goHome()
     
     showScreen("#home");  
 
-    { 
+    
+    /*if
+    {
+        $("#home_button").hide();
+    }
+    else 
+    {
 
-    if (showScreen == ('#home'))
+        $("#home_button").show();
+    }
+
+    /*{ 
+
+    if ('.screen' == ('#home'))
         $("#home_button").hide();
 
     else
         $("#home_button").show();
     } 
-     
+    */ 
 }
 
 
