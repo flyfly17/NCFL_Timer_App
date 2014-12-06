@@ -25,15 +25,15 @@
 
 <body>
 	<button id="home_button" type="button" class="btn btn-large pull-right">
-	   <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+	   <span class="glyphicon glyphicon-home" aria-hidden="true" aria-label="home"></span>
 
     </button>
 
     <button id="back_button" type="button" class="btn btn-large pull-left">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true" aria-label="back"></span>
     </button>
 
-<section id="home" class="text-center screen initial">
+<section id="home" class="text-center screen initial ">
 
 	<h1> Brooklyn Queens Catholic Forensic League </h1>
 	
@@ -41,7 +41,6 @@
 
     <button id="show-speech" type="button" class="btn btn-lg btn-block btn-success">Speech</button>
     <button id="show-debate" type="button" class="btn btn-lg btn-block btn-success">Debate</button>
-
     
     <!--<<script> {$("#home_button").hide();} </script>-->
     
@@ -102,7 +101,7 @@
     <header>
         <h2 class="page-header"><%= name %></h2>
         <div class="row">
-            <h1 id="main_timer" data-paused="false" class="text-center">
+            <h1 id="main_timer" data-paused="false" class="text-center timer" data-reset="0">
                 <span class="mins">0</span>:<span class="secs">00</span> 
             </h1>
         </div>
@@ -116,18 +115,18 @@
     </div>
 
     <div class="row margin-top">
-    	<button id="prep_timer1" class="col-md-6 btn btn-info" data-paused="true">
+    	<button id="prep_timer1" class="col-md-6 btn btn-info timer prep" data-paused="true" data-reset="<%= prepTime %>">
             <span class=>Aff Prep</span> 
             <span class="glyphicon glyphicon-play"></span>
             <span class="glyphicon glyphicon-pause collapse"></span>
-            <span class="mins"><%= prepTime %></span>:<span class="secs">00</span> 
+            <span class="mins"><%= prepMins %></span>:<span class="secs">00</span> 
         </button>
 
-        <button id="prep_timer2" class="col-md-6 btn btn-info" data-paused="true">
+        <button id="prep_timer2" class="col-md-6 btn btn-info timer prep" data-paused="true" data-reset="<%= prepTime %>">
             <span class=>Neg Prep</span> 
             <span class="glyphicon glyphicon-play"></span>
             <span class="glyphicon glyphicon-pause collapse"></span>
-            <span class="mins"><%= prepTime %></span>:<span class="secs">00</span> 
+            <span class="mins"><%= prepMins %></span>:<span class="secs">00</span> 
 
         </button>
     </div>
@@ -140,20 +139,13 @@
 
         <div class="row">
 
-            <h3 id="main_timer" class="text-center">
-                <span class="mins">0</span>:<span class="secs">00</span> 
+            <h3 id="main_timer" class="text-center timer speech" data-reset="<%= time %>">
+	            <span class="mins"><%= mins %></span>:<span class="secs"><%= secs %></span> 
             </h3>
 
         </div>
 
     </header>
-
-    <div id="speech-round" class="row">
-        <% for(key in formats) { %>
-            <button id="<%= key %>" class="timerFormat btn btn-default btn-xs col-md-4" data-time="<%= formats[key] %>"><%= debateLabels[key] %></button>
-         
-        <% } %>
-    </div>
     
 </script> 
 
@@ -162,6 +154,7 @@
     <button id="<%= code %>" class="btn btn-primary btn-lg"><%= name %></button>
 
 </script>
+
 </body>
 
 </html>

@@ -21,12 +21,13 @@ function DebateType(code, name, prepTime, formats)
 
 var speechTypes = 
 [
-    new DebateType("dec", "Declamation", 0, {dec: 10 * 60}),
+    new DebateType("dec", "Declamation", 0, {dec: .1 * 60}),
     new DebateType("di", "Dramatic Interpretation", 0, {di: 10 * 60}),
     new DebateType("duo", "Duo Interpretation", 0, {duo: 10 * 60}), 
     new DebateType("oi", "Oral Interpretation", 0, {oi: 10 * 60}), 
     new DebateType("oo", "Original Oratory", 0, {oo: 10 *60}),
     new DebateType("ex", "Extemporaneous", 0, {ex: 7 * 60}),
+    new DebateType("cgs", "Student Congress", 0, {congress: 3 * 60}),
 ];
 
 var speechLabels = {
@@ -36,6 +37,7 @@ var speechLabels = {
     oi: "Oral Interpretation",
     oo: "Original Oratory",
     ex: "Extemporaneous",
+    cgs: "Student Congress"
 }
 
 var debateTypes =
@@ -55,7 +57,8 @@ var debateTypes =
             profocus: 2 * 60, 
             confocus: 2 * 60
          }),
-    new DebateType("policy", "Team Policy Debate", 4, {constructive: 8 * 60, cross: 3 * 60, rebuttal: 4 * 60} )
+    new DebateType("policy", "Team Policy Debate", 4, {constructive: 8 * 60, cross: 3 * 60, rebuttal: 4 * 60} ),
+
 ];
 
 var debateLabels = {
@@ -64,23 +67,24 @@ var debateLabels = {
     negcx: "Neg Cross-Ex",
     nc: "Neg Construct", 
     affcx: "Aff Cross-Ex", 
-    ar1: "Affirmative Rebuttal One", 
-    nr: "Negative Rebuttal", 
-    ar2: "Affirmative Rebuttal 2",
-    pro1: "First Pro", 
-    con1: "First Con", 
+    ar1: "Aff Rebuttal One", 
+    nr: "Neg Rebuttal", 
+    ar2: "Aff Rebuttal 2",
+    pro1: "1st Pro", 
+    con1: "1st Con", 
     crossfire: "Crossfire", 
-    pro2: "Second Pro", 
-    con2: "Second Con", 
+    pro2: "2nd Pro", 
+    con2: "2nd Con", 
     crossfire: "Crossfire", 
-    pro1sum: "First Pro Summary", 
-    con1sum: "First Con Summary", 
+    pro1sum: "1st Pro Summary", 
+    con1sum: "1st Con Summary", 
     grandcross: "Grand Crossfire", 
     profocus: "Pro Focus", 
     confocus: "Con Focus",
     constructive: "Constructive", 
-    cross: "Cross Examination",
+    cross: "Cross Exam",
     rebuttal: "Rebuttal",
+
 };
 
 

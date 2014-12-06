@@ -35,12 +35,6 @@ function updateTimer(timer_id, m, s)
     $(timer_id + " .secs").html(pad(s));
 }
 
-function reset(timer_id)
-{
-    $(".timerFormat").removeClass("disabled active");
-    $("#timer-controls button").addClass("disabled").removeClass("active");
-    updateTimer(timer_id, 0,0);
-}
 
 function countdown(timer_id, count)
 {
@@ -77,6 +71,9 @@ function readTimeLeft(timer_id)
 
 function startCount(timer_id)
 {
+
+    $("#reset").addClass("disabled");
+
     var count = readTimeLeft(timer_id);
     $(timer_id).data("paused", false);
     countdown(timer_id, count);
@@ -84,49 +81,74 @@ function startCount(timer_id)
 
 function stopCount(timer_id)
 {
+    $("#reset").removeClass("disabled");
+
     $(timer_id).data("paused", true);
 }
 
-
-/*function showSpeechTimer(dt)
+function reset(timer_id)
 {
-    
-    console.log("showing the timer screen");
-    //read the template
-    count = count + 3;
+    $(".timerFormat").removeClass("disabled active");
+    if($(timer_id).hasClass("speech")) 
+        $("#reset").addClass("disabled").removeClass("active");
+    else
+        $("#timer-controls button").addClass("disabled").removeClass("active");
 
-    console.log("holder");
-    var tmpl = _.template($("#tmpl-speech_timer").html());
-    var screen = $("#speech_timer");
-    var context = {name: dt.name, code: dt.code, roundtime: dt.roundtime,};
-    screen.html(tmpl(context));
+    var reset_time = $(timer_id).data("reset");
+    var m = mins(reset_time);
+    var s = secs(reset_time);
+    reset_timer($(timer_id));
     
-    //bind the buttons to our timer function
-    $(".timerFormat").click(function(event) {
-        $("#timer-controls button").removeClass("disabled");  
-        var time = $(event.target).data('time');
-        $(event.target).addClass("active");
-        $(event.target).siblings(".timerFormat").addClass("disabled").removeClass("active");
-        updateTimer('#main_timer', mins(time), secs(time));
-        
-    });
+    // $(".timer").each(reset_timer);
 
-    showScreen("#timer");
 }
 
-*/
+function reset_timer(timer)
+{
+
+    var reset_time = $(timer).data("reset");
+    var m = mins(reset_time);
+    var s = secs(reset_time);
+    var timer_id = $(timer).attr("id");
+    timer_id = "#" + timer_id;
+    updateTimer(timer_id, m, s);
+
+}
+
 
 function showTimer(dt)
 {
     
     console.log("showing the timer screen");
+    console.log("debate type: " + dt);
+    console.log("# of debate type formats: " + Object.keys(dt.formats).length);
+
     //read the template
     count = count + 3;
 
-    console.log("holder");
-    var tmpl = _.template($("#tmpl-debate_timer").html());
+    var tmpl = null;
+    var context = {}
+
+
+    if(Object.keys(dt.formats).length == 1)
+    {
+        console.log("found a speech format");
+        tmpl = _.template($("#tmpl-speech_timer").html());
+
+        var time = dt.formats[Object.keys(dt.formats)[0]];
+
+        $("#timer-controls #start").removeClass("disabled");
+        $("#timer-controls #stop").removeClass("disabled");
+        context = {name: dt.name, code: dt.code, prepTime: 0, mins: mins(time), secs: pad(secs(time)), time: time};
+    }
+    else
+    {
+        tmpl = _.template($("#tmpl-debate_timer").html());
+        context = {name: dt.name, code: dt.code, prepMins: dt.prepTime, prepTime: dt.prepTime * 60, formats: dt.formats};
+    }
+
     var screen = $("#debate_timer");
-    var context = {name: dt.name, code: dt.code, prepTime: dt.prepTime, formats: dt.formats};
+    
     screen.html(tmpl(context));
     
     //bind the buttons to our timer function
@@ -135,7 +157,7 @@ function showTimer(dt)
         var time = $(event.target).data('time');
         $(event.target).addClass("active");
         $(event.target).siblings(".timerFormat").addClass("disabled").removeClass("active");
-        updateTimer('#main_timer', mins(time), secs(time));
+        updateTimer('#main_timer', mins(time), secs(time));       
         
     });
     //click event for prep time
@@ -281,20 +303,20 @@ function goBack()
 function goHome()
 {
     
-    showScreen("#home");  
+    showScreen("#home");
 
     
-    /*if
+    /*if(
     {
-        $("#home_button").hide();
+        $('#home_button').hide();
     }
     else 
     {
 
         $("#home_button").show();
     }
-
-    /*{ 
+    
+    { 
 
     if ('.screen' == ('#home'))
         $("#home_button").hide();
@@ -302,7 +324,7 @@ function goHome()
     else
         $("#home_button").show();
     } 
-    */ 
+    */
 }
 
 
